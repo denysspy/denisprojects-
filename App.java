@@ -1,194 +1,107 @@
-import java.util.Scanner; // Für input 
+import java.util.Scanner; // Hilfsbibliothek um Funktion Scanner zu nutzen (Objekt der Eingabe überwacht)
 
 public class App {
 
-    static  float addition(float number1, float number2)
-    {
-        float result;
-        result = number1 + number2;
-        return result;
-    }
+    public static void main(String args[]){
 
-    static  float subtraktion(float number1, float number2)
-    {
-        float result;
-        result = number1 - number2;
-        return result;
-    }
+        Scanner scan = new Scanner(System.in);
+        int i;
+        double a = 0;
+        double b = 0;
 
-    static  float multiplikation(float number1, float number2)
-    {
-        float result;
-        result = number1 * number2;
-        return result;
-    }
-    static  float division(float number1, float number2)
-    {
-        float result;
-        result = number1 / number2;
-        return result;
-    }
-
-    static float sinus(float number1){
-        float result;
-        result = (float) Math.sin(number1);  // math gibt double zurück
-        return result;
-
-    }
-
-    static float gcd(float number1, float number2) {
-
-        while (number2 !=0){
-            float temp = number2;
-            number2 = number1 % number2;
-            number1 = temp;
-        }
-        return number1;
-    }
-
-    static float fibonacci(float number1){
-        if (number1 == 0){
-            return 0;
-        }
-        else if(number1 ==1){
-            return 1; 
-        }   
-        
-        else{
-            return fibonacci(number1 - 1) + fibonacci(number1 - 2);
-        }
-
-    }
-
-
-    public static void main(String[] args) throws Exception {
-        // static bedeutet  die methode gehört zu main class und nicht zu einem objekt der klasse maain
-        // void die methode hat keinen rückgabewert
-
-
-        Scanner numbers = new Scanner(System.in); // Scanner Objekt erstellen
-        float number1;
-        float number2;
-        int function;
-
-
-        System.out.println("CALCULATOR - Bitte wählen Sie eine Funktion aus:");
-        System.out.println("0: end program ");
-        System.out.println("1. Addition");
-        System.out.println("2. Subtraktion");
-        System.out.println("3. Multiplikation");
-        System.out.println("4. Division");
-        System.out.println("5. Sin()");
-        System.out .println("6. x^y");
-        System.out.println("7. gcd()");
-        System.out.println("8. fibonacci(n)");
-
-        System.out.println("____________________________________________________________");
-
-        System.out.println("Bitte wählen Sie die Funktion aus (0-8):");
-        function = numbers.nextInt();
-
-        
         do {
-            if(function < 0 || function > 8) {
-                System.out.println("Ungültige Eingabe. Bitte wählen Sie eine Funktion aus (0-8):");
-                function = numbers.nextInt();
+            i = menu(scan);
+
+            if (i == 0) {
+                System.out.println("Programm end");
+                System.exit(0);
+            } 
+            else if (i > 4) {
+                System.err.println("Funktion not exist");
+                System.out.println("Programm end");
+                System.exit(0);
+            } 
+            else {
+                System.out.println("Please enter numbers:");
+                System.out.print("1: ");
+                a = scan.nextDouble();
+                System.out.print("2: ");
+                b = scan.nextDouble();
+                System.out.println();
             }
-            } while(function < 0 || function > 8);
-       
 
-
-        if (function == 0) {
-            System.out.println("Programm wird beendet.");
-            System.exit(0); // das programm wurde erfolgreich beendet
-        }
-
-        else if (function == 1) {
-            System.out.println("Bitte geben Sie die erste Zahl ein:");
-            number1 = numbers.nextFloat();
-            System.out.println("Bitte geben Sie die zweite Zahl ein:");
-            number2 = numbers.nextFloat();
-
-            float result = addition(number1, number2);
-            System.out.printf("Ergebnis:  %.0f%n", result);
-        }
-        else if (function == 2) {
-            System.out.println("Bitte geben Sie die erste Zahl ein:");
-            number1 = numbers.nextFloat();
-            System.out.println("Bitte geben Sie die zweite Zahl ein:");
-            number2 = numbers.nextFloat();
-
-            float result = subtraktion(number1, number2);
-            System.out.printf("Egebnis: %.0f%n", result);
-        }
-        else if (function == 3) {
-            System.out.println("Bitte geben Sie die erste Zahl ein:");
-            number1 = numbers.nextFloat();
-            System.out.println("Bitte geben Sie die zweite Zahl ein:");
-            number2 = numbers.nextFloat();
-
-            float result = multiplikation(number1, number2);
-            System.out.println("Ergebnis: " + result);
-        }
-        else if (function == 4) {
-            System.out.println("Bitte geben Sie die erste Zahl ein:");
-            number1 = numbers.nextFloat();
-            System.out.println("Bitte geben Sie die zweite Zahl ein:");
-            number2 = numbers.nextFloat();
-
-            float result = division(number1, number2);
-            System.out.println("Ergebnis:" + result);
-        }
-
-        else if (function == 5 ){
-
-            System.out.println("Bitte geben Sie die Zahl ein:");
-            number1 = numbers.nextFloat();
-
-            float result = sinus(number1); 
-            System.out.println("Ergebnis: " + result); 
-        }
-
-        else if (function  == 7){
-            System.out.println("Bitte geben Sie die erste Zahl ein:");
-            number1 = numbers.nextFloat();
-            System.out.println("Bitte geben Sie die zweite Zahl ein:");
-            number2 = numbers.nextFloat();
-
-            float result = gcd(number1, number2);
-            System.out.println("Ergebnis: " + result);
-        }
-
-        else if (function == 8) {
-        
-            System.out.println("Bitte geben Sie die Zahl ein:");
-            number1 = numbers.nextFloat();
-            number1 = (int) number1; // casten zu int, da fibonacci nur für ganze Zahlen definiert ist
-
-            float result = fibonacci(number1);
-            result = (int) result; // casten zu int, da fibonacci nur für ganze Zahlen definiert ist
-            System.out.printf("Ergebnis: %.0f%n",  result);
-
-
-            for (int i = 0; i < number1; i++) {
-                System.out.print(fibonacci(i) + "--");
-            }
+            System.out.println("Numbers:");
+            System.out.println("1. " + a);
+            System.out.println("2. " + b);
             System.out.println();
-        }
 
+            switch (i){
+                case 1:
+                    System.out.println("Result = " + add(a, b));
+                    System.out.println();
+                    break;
 
+                case 2:
+                    System.out.println("Result = " + subtract(a, b));
+                    System.out.println();
+                    break;
 
-        else {
-            System.out.println("Ungültige Auswahl. Bitte wählen Sie eine Zahl zwischen 0 und 8.");
-        }
+                case 3:
+                    System.out.println("Result = " + multiply(a, b));
+                    System.out.println();
+                    break;
 
-        numbers.close(); // Scanner schließen, um Ressourcen freizugeben
+                case 4:
+                    if (b != 0.0) {
+                        System.out.println("Result = " + divide(a, b));
+                        System.out.println();
+                    } else {
+                        System.out.println("Divide with 0 can't be solved");
+                        System.out.println();
+                    }
+                    break;
+            }
 
-      
+        } while (i != 0);
 
-
-         
+        scan.close();
     }
 
-    
+   // Methoden
+    public static int menu(Scanner scan) {
+        System.out.println("CALCULATOR - please select:");
+        System.out.println("0: end program");
+        System.out.println("1: add");
+        System.out.println("2: subtract");
+        System.out.println("3: multiply");
+        System.out.println("4: divide");
+        System.out.print("Please select: ");
+        int auswahl = scan.nextInt();
+        System.out.println();
+        return auswahl;
+    }
+
+    public static double add(double a, double b) {
+        return a + b;
+    }
+
+    public static double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public static double multiply(double a, double b) {
+        return a * b;
+    }
+
+    public static double divide(double a, double b) {
+        return a / b;
+    }
 }
+
+//Die Methoden sind STATIC weil main auch STATIC ist
+//STATIC Methoden gehören zu Klassen und nicht zu Objekt (Objekt wird nicht erstellt)
+
+//Schritt 2 -   Der Java Compiler prüft Code
+//              Bei Erfolg erzeugt er Bytecode in App.java
+
+//Schritt 3 -   class wird ausgeführt
